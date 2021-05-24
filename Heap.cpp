@@ -25,7 +25,7 @@ template<class Type, class Comp=less<Type> > class KHeap{
 		while(k*tmp+1 < heap->size()){
 			size_t ind = k*tmp+1;
             size_t first =  k*tmp+1;
-            // for itterating all the childrens of k arrary status
+            // for iterating all the childrens of k arrary status
 			for ( size_t x = 1; ((first+x)< heap->size()) and (x< k); x++){
 
 				if ( Comp()(heap->at(  first +x ), heap->at( ind ) ) ){
@@ -45,7 +45,7 @@ template<class Type, class Comp=less<Type> > class KHeap{
 		
     void print(){
         for (Type iter: *heap)
-            cout << iter << " ";
+            cout << iter ;
         cout << endl;
     }
 
@@ -127,8 +127,32 @@ struct functor
 	}
 };
 
+struct Student{
+	string name;
+	size_t age;
+	int marks;
+
+	Student(string name, size_t age, const int &subjects_marks){
+		this->name = name;
+		this->age = age;
+		this->marks = subjects_marks;
+	}
+	void static print_header(){
+		cout<< setw(15) << "Student Name" << setw(10) << "Marks" << endl;
+
+	}
+
+	  friend ostream &operator<<( ostream &output, const Student &s){
+		output << setw(15) << left << s.name << setw(10)<< s.marks;
+		output << endl;
+		return output;
+	}
+
+
+};
 
 void k_heap(){
+
 	KHeap<int, functor> h(7);
     for (int i=60; i>0; i--)
     	h.push(rand()%200);
@@ -139,8 +163,49 @@ void k_heap(){
 
 }
 
+void class_example(){
+
+	struct Comparator
+	{
+		bool operator()(const Student &a, const Student &b){
+
+			return a.marks > b.marks ;
+
+		}
+	};
+	int jhon_marks = 60;
+	int smith_marks = 80;
+	int david_marks = 15;
+	int jos_marks =  94;
+	int kim_marks =  9;
+	int tim_marks =  89;
+	int fin_marks =  70;
+
+	KHeap<Student, Comparator> heap(3);
+	// dataset
+	vector <Student> university{
+		Student("jhon",18, jhon_marks),
+		Student("smith",21, smith_marks),
+		Student("david",19, david_marks),
+		Student("jos",20, jos_marks),
+		Student("kim",21, kim_marks),
+		Student("tim",22, tim_marks),
+		Student("fin",20, fin_marks)
+	};
+	for (Student &each: university){
+		heap.push(each);
+		Student::print_header();
+		heap.print();
+	}
+
+}
+
+
+
+
 int main(){	
 
 	k_heap();
+	class_example();
 	return 0;
 }
