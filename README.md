@@ -1,4 +1,5 @@
 # k-ary--Heap
+
 ```cpp
 void k_heap() {
     KHeap < int, functor > h(7);
@@ -10,6 +11,14 @@ void k_heap() {
     h.print();
 }
 ```
+<details>
+    <summary><b>Ternary Heap Example👇🏻</b></summary>
+    <img src="./ternary.png" height='100%'/>
+</details>
+<details>
+    <summary><b>Binary Heap Example👇🏻</b></summary>
+    <img src="./binary.png" height='100%'/>
+</details>
 
 ### Example
 ```cpp
@@ -22,7 +31,7 @@ void class_example() {
     };
 
     KHeap < Student, Comparator > heap(3);
-    // dataset
+    // example data
     vector < Student > university {
         Student("jhon", 18, 60),
             Student("smith", 21, 80),
